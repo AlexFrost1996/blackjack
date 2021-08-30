@@ -1,0 +1,29 @@
+AllCops:
+  TargetRubyVersion: 2.7.4
+
+AllCops:
+  Exclude:
+    - lesson3/test.rb
+    - lesson4/test.rb
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 110
+
+Style/ClassVars:
+  Enabled: false
+
+Lint/RedundantStringCoercion:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+  
