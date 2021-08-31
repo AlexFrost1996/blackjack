@@ -1,3 +1,5 @@
+require_relative 'card'
+
 class Deck
   FACES = [*(2..10), 'J', 'Q', 'K', 'A'].freeze
   SUITS = ['♥', '♠', '♣', '♦'].freeze

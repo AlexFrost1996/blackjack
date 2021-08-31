@@ -6,6 +6,7 @@ class Bank
 
   def prize(divider = 1)
     prize = @bank / divider
-    bank -= prize
+    @bank = 0
+    prize
   end
 end
