@@ -20,6 +20,10 @@ class Hand
     @hand.map(&:hide) * ''
   end
 
+  def three_card?
+    @hand.size == 3
+  end
+
   private
 
   def current_value

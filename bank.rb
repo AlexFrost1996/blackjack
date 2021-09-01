@@ -4,6 +4,10 @@ class Bank
     @bank = 0
   end
 
+  def bets(*params)
+    params.each { |param| @bank += param}
+  end
+
   def prize(divider = 1)
     prize = @bank / divider
     @bank = 0
