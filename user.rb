@@ -16,7 +16,7 @@ class User
 
   def bet(bet_size = BET)
     bankroupt!
-    bankroll -= bet_size
+    self.bankroll -= bet_size
     bet_size
   end
 

@@ -3,7 +3,7 @@ require_relative 'user'
 class Dealer < User
   def initialize
     super
-    @user = 'Dealer'
+    @name = 'Dealer'
   end
 
   def enough?

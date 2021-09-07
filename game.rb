@@ -1,6 +1,7 @@
 require_relative 'bank'
 require_relative 'hand'
 require_relative 'user'
+require_relative 'card'
 require_relative 'dealer'
 require_relative 'deck'
 
@@ -40,7 +41,6 @@ class Game
 
   def user_take_card(quantity = 1)
     user.hand.take_card(deck.deal(quantity))
-    puts "#{user.name}, value in your hand = #{user.hand.total_value}"
   end
 
   def dealer_take_card(quantity = 1)
@@ -54,9 +54,9 @@ class Game
   def user_choice
     user_show
     puts 'Enter you choice'
-    MENU_CHOISE.each { |item| puts "#{item[:index]}: #{item[:title]}" }
+    MENU_CHOICE.each { |item| puts "#{item[:index]}: #{item[:title]}" }
     choice = gets.chomp.to_i
-    need_item = MENU_CHOISE.find { |item| item[:index] == choice }
+    need_item = MENU_CHOICE.find { |item| item[:index] == choice }
     send(need_item[:action])
   end
 
@@ -201,3 +201,5 @@ class Game
     @end_round = false
   end
 end
+
+Game.new
