@@ -9,9 +9,14 @@ class Game
   attr_accessor :user, :dealer, :deck, :bank, :wins
   
   MENU_CHOICE = [
-    {index: 1, title: 'pass', action: 'user_pass'},
-    {index: 2, title: 'take card', action: 'user_take_card'},
-    {index: 3, title: 'open cards', action: 'open_cards'}
+    {index: 1, title: 'pass', action: :user_pass},
+    {index: 2, title: 'take card', action: :user_take_card},
+    {index: 3, title: 'open cards', action: :open_cards}
+  ].freeze
+
+  NEW_ROUND = [
+    {index: 1, title: 'start new nound', action: :new_round},
+    {index: 2, title: 'quit the game', action: :quit}
   ].freeze
 
   def initialize
@@ -30,7 +35,7 @@ class Game
     dealer_take_card(2)
     player_choice
     winner
-    new_round
+    new_round?
   end
 
   def player_choice
@@ -162,7 +167,7 @@ class Game
   end
 
   def bank_show
-    puts "Bank: #{bank.bank}"
+    puts "Bank on this round: #{bank.bank}"
   end
 
   def user_show
@@ -186,10 +191,23 @@ class Game
     puts "#{dealer.name} wins: #{wins[:dealer]}"    
   end
 
+  def new_round?
+    puts 'Enter you choice'
+    NEW_ROUND.each { |item| puts "#{item[:index]}: #{item[:title]}" }
+    choice = gets.chomp.to_i
+    need_item = NEW_ROUND.find { |item| item[:index] == choice }
+    send(need_item[:action])
+  end
+
   def new_round
     wins_status
     clear_data
     start
+  end
+
+  def quit
+    puts 'GAME OVER! Bye!'
+    exit(0)
   end
 
   def clear_data
