@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'card'
 
 class Deck
@@ -18,13 +20,14 @@ class Deck
 
   def deck
     FACES.each do |face|
-      if face.is_a?(Integer) 
-        value = face
-      elsif face == 'A'
-        value = 11
-      else
-        value = 10
-      end
+      value = case face
+              when Integer
+                face
+              when 'A'
+                11
+              else
+                10
+              end
       SUITS.each do |suit|
         @deck << Card.new(face, suit, value)
       end

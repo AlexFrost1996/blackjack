@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'bank'
 require_relative 'hand'
 require_relative 'user'
@@ -7,16 +9,16 @@ require_relative 'deck'
 
 class Game
   attr_accessor :user, :dealer, :deck, :bank, :wins
-  
+
   MENU_CHOICE = [
-    {index: 1, title: 'pass', action: :user_pass},
-    {index: 2, title: 'take card', action: :user_take_card},
-    {index: 3, title: 'open cards', action: :open_cards}
+    { index: 1, title: 'pass', action: :user_pass },
+    { index: 2, title: 'take card', action: :user_take_card },
+    { index: 3, title: 'open cards', action: :open_cards }
   ].freeze
 
   NEW_ROUND = [
-    {index: 1, title: 'start new nound', action: :new_round},
-    {index: 2, title: 'quit the game', action: :quit}
+    { index: 1, title: 'start new nound', action: :new_round },
+    { index: 2, title: 'quit the game', action: :quit }
   ].freeze
 
   def initialize
@@ -25,7 +27,7 @@ class Game
     @deck = Deck.new
     @bank = Bank.new
     @end_round = false
-    @wins = {user: 0, dealer: 0}
+    @wins = { user: 0, dealer: 0 }
     start
   end
 
@@ -188,7 +190,7 @@ class Game
 
   def wins_status
     puts "#{user.name} wins: #{wins[:user]}"
-    puts "#{dealer.name} wins: #{wins[:dealer]}"    
+    puts "#{dealer.name} wins: #{wins[:dealer]}"
   end
 
   def new_round?

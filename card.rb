@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Card
   attr_accessor :value
   attr_reader :suit, :face

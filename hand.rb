@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Hand
   attr_reader :total_value
 
