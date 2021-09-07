@@ -27,10 +27,15 @@ class Game
     take_bets
     user_take_card(2)
     dealer_take_card(2)
-    user_choice
-    dealer_choice
+    player_choice
     winner
     new_round
+  end
+
+  def player_choice
+    user_choice
+    dealer_choice
+    status
   end
 
   def user_take_card(quantity = 1)
@@ -47,6 +52,7 @@ class Game
   end
 
   def user_choice
+    user_show
     puts 'Enter you choice'
     MENU_CHOISE.each { |item| puts "#{item[:index]}: #{item[:title]}" }
     choice = gets.chomp.to_i
@@ -63,19 +69,16 @@ class Game
   end
 
   def winner
-    if user_lost? && dealer_lost?
+    if user_lost? || dealer_have_more_points?
+      dealer_wins
+    elsif dealer_lost? || user_have_more_points?
+      user_wins
+    elsif user_lost? && dealer_lost?
       tie_prize
-    elsif user_lost?
-      dealer_wins
-    elsif dealer_lost?
-      user_wins
-    elsif user_have_more_points?
-      user_wins
-    elsif dealer_have_more_points?
-      dealer_wins
     else
       tie_prize
     end
+    status
   end
 
   def user_pass
@@ -152,7 +155,39 @@ class Game
     user.bankroll += tie_prize
   end
 
+  def status
+    bank_show
+    user_show
+    dealer_show
+  end
+
+  def bank_show
+    puts "Bank: #{bank.bank}"
+  end
+
+  def user_show
+    puts "#{user.name}:
+    Bankroll: #{user.bankroll}
+    Cards:    #{user.hand.show}
+    Points:   #{user.hand.total_value}
+    Wins:     #{wins[:user]}"
+  end
+
+  def dealer_show
+    puts "#{dealer.name}:
+    Bankroll: #{dealer.bankroll}
+    Cards:    #{open_cards ? dealer.hand.show : dealer.hand.hide}
+    Points:   #{open_cards ? dealer.hand.total_value : '**'}
+    Wins:     #{wins[:dealer]}"
+  end
+
+  def wins_status
+    puts "#{user.name} wins: #{wins[:user]}"
+    puts "#{dealer.name} wins: #{wins[:dealer]}"    
+  end
+
   def new_round
+    wins_status
     clear_data
     start
   end
